@@ -1,0 +1,89 @@
+<div class="admin-section">
+  <h2 class="section-title">Manage Skills</h2>
+
+  <div
+    class="message"
+    *ngIf="message"
+    [class.success]="messageType === 'success'"
+    [class.error]="messageType === 'error'"
+  >
+    {{ message }}
+  </div>
+
+  <form [formGroup]="skillForm" (ngSubmit)="onSubmit()" class="admin-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Skill Name *</label>
+        <input type="text" formControlName="name" placeholder="e.g., JavaScript" />
+      </div>
+      <div class="form-group">
+        <label>Category *</label>
+        <select formControlName="category">
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Proficiency Level ({{ skillForm.get('level')?.value }}%)</label>
+        <input type="range" formControlName="level" min="0" max="100" class="range-input" />
+        <div class="range-labels">
+          <span>Beginner</span>
+          <span>Intermediate</span>
+          <span>Advanced</span>
+          <span>Expert</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Order</label>
+        <input type="number" formControlName="order" placeholder="0" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Icon Class (Font Awesome)</label>
+      <input type="text" formControlName="icon" placeholder="e.g., fab fa-js" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="skillForm.invalid || isLoading">
+        {{ isEditing ? 'Update' : 'Add' }} Skill
+      </button>
+      <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="resetForm()">
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <div class="items-list">
+    <h3>Skills List</h3>
+
+    <div class="category-section" *ngFor="let category of categories">
+      <div *ngIf="getSkillsByCategory(category).length > 0">
+        <h4 class="category-title">{{ category }}</h4>
+        <div class="skills-grid">
+          <div class="skill-card" *ngFor="let skill of getSkillsByCategory(category)">
+            <div class="skill-info">
+              <span class="skill-name">{{ skill.name }}</span>
+              <span class="skill-level">{{ skill.level }}%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" [style.width.%]="skill.level"></div>
+            </div>
+            <div class="skill-actions">
+              <button class="btn-icon btn-edit" (click)="editSkill(skill)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn-icon btn-delete" (click)="deleteSkill(skill._id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="empty-message" *ngIf="skills.length === 0">No skills added yet.</p>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="hero-greeting">Hello, I'm</span>
+        <h1 class="hero-name">{{ profile?.name || 'Your Name' }}</h1>
+        <h2 class="hero-title">{{ profile?.title || 'Full Stack Developer' }}</h2>
+        <p class="hero-tagline">{{ profile?.tagline || 'Building amazing digital experiences' }}</p>
+        <div class="hero-buttons">
+          <a routerLink="/projects" class="btn btn-primary">View Projects</a>
+          <a routerLink="/contact" class="btn btn-secondary">Contact Me</a>
+        </div>
+      </div>
+      <div class="hero-image" *ngIf="profile?.photo">
+        <div class="image-wrapper">
+          <img [src]="getPhotoUrl(profile?.photo)" [alt]="profile?.name" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-decoration">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+  </div>
+</section>
+
+<section class="featured-section" *ngIf="featuredProjects.length > 0">
+  <div class="section-container">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" *ngFor="let project of featuredProjects">
+        <div class="project-image">
+          <img [src]="getProjectImageUrl(project.image)" [alt]="project.title" />
+          <div class="project-overlay">
+            <a
+              *ngIf="project.liveUrl"
+              [href]="project.liveUrl"
+              target="_blank"
+              class="project-link"
+            >
+              <i class="fas fa-external-link-alt"></i>
+            </a>
+            <a
+              *ngIf="project.githubUrl"
+              [href]="project.githubUrl"
+              target="_blank"
+              class="project-link"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-description">{{ project.description }}</p>
+          <div class="project-tech">
+            <span *ngFor="let tech of project.technologies" class="tech-tag">{{ tech }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-footer">
+      <a routerLink="/projects" class="btn btn-outline">View All Projects</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="section-container">
+    <div class="cta-content">
+      <h2 class="cta-title">Let's Work Together</h2>
+      <p class="cta-text">Have a project in mind? Let's create something amazing.</p>
+      <a routerLink="/contact" class="btn btn-primary btn-large">Get In Touch</a>
+    </div>
+  </div>
+</section>

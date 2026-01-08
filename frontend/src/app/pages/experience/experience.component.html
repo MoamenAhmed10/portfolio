@@ -1,0 +1,62 @@
+<section class="experience-page">
+  <div class="page-container">
+    <h1 class="page-title">Experience</h1>
+
+    <div class="experience-list" *ngIf="experienceList.length > 0; else noExperience">
+      <div class="experience-card" *ngFor="let exp of experienceList">
+        <div class="experience-header">
+          <div class="experience-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="experience-info">
+            <h3 class="experience-title">{{ exp.title }}</h3>
+            <h4 class="experience-company">{{ exp.company }}</h4>
+            <div class="experience-meta">
+              <span class="experience-date">
+                <i class="fas fa-calendar-alt"></i>
+                {{ exp.startDate }} - {{ exp.current ? 'Present' : exp.endDate }}
+              </span>
+              <span class="experience-location" *ngIf="exp.location">
+                <i class="fas fa-map-marker-alt"></i>
+                {{ exp.location }}
+              </span>
+            </div>
+          </div>
+          <span class="current-badge" *ngIf="exp.current">Current</span>
+        </div>
+
+        <div class="experience-body">
+          <p class="experience-description" *ngIf="exp.description">{{ exp.description }}</p>
+
+          <div
+            class="experience-responsibilities"
+            *ngIf="exp.responsibilities && exp.responsibilities.length > 0"
+          >
+            <h5 class="responsibilities-title">Key Responsibilities:</h5>
+            <ul class="responsibilities-list">
+              <li *ngFor="let resp of exp.responsibilities">{{ resp }}</li>
+            </ul>
+          </div>
+
+          <div
+            class="experience-technologies"
+            *ngIf="exp.technologies && exp.technologies.length > 0"
+          >
+            <div class="tech-tags">
+              <span class="tech-tag" *ngFor="let tech of exp.technologies">{{ tech }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noExperience>
+      <div class="empty-state">
+        <i class="fas fa-briefcase"></i>
+        <h3>No experience entries yet</h3>
+        <p>Add your work experience through the admin dashboard.</p>
+        <a routerLink="/admin" class="btn btn-primary">Go to Admin</a>
+      </div>
+    </ng-template>
+  </div>
+</section>

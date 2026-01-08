@@ -1,0 +1,86 @@
+<section class="contact-page">
+  <div class="page-container">
+    <h1 class="page-title">Get In Touch</h1>
+    <p class="page-subtitle">
+      Have a question or want to work together? I'd love to hear from you!
+    </p>
+
+    <div class="contact-content" *ngIf="contact && contact.email; else noContact">
+      <div class="contact-info">
+        <div class="info-card" *ngIf="contact.email">
+          <div class="info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="info-content">
+            <h3>Email</h3>
+            <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+          </div>
+        </div>
+
+        <div class="info-card" *ngIf="contact.phone">
+          <div class="info-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="info-content">
+            <h3>Phone</h3>
+            <a [href]="'tel:' + contact.phone">{{ contact.phone }}</a>
+          </div>
+        </div>
+
+        <div class="info-card" *ngIf="contact.address">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Location</h3>
+            <p>{{ contact.address }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-section">
+        <h2 class="social-title">Connect With Me</h2>
+        <div class="social-links">
+          <a *ngIf="contact.github" [href]="contact.github" target="_blank" class="social-card">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+          <a *ngIf="contact.linkedin" [href]="contact.linkedin" target="_blank" class="social-card">
+            <i class="fab fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a *ngIf="contact.twitter" [href]="contact.twitter" target="_blank" class="social-card">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+          </a>
+          <a *ngIf="contact.facebook" [href]="contact.facebook" target="_blank" class="social-card">
+            <i class="fab fa-facebook"></i>
+            <span>Facebook</span>
+          </a>
+          <a
+            *ngIf="contact.instagram"
+            [href]="contact.instagram"
+            target="_blank"
+            class="social-card"
+          >
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+          </a>
+          <a *ngIf="contact.website" [href]="contact.website" target="_blank" class="social-card">
+            <i class="fas fa-globe"></i>
+            <span>Website</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noContact>
+      <div class="empty-state">
+        <i class="fas fa-address-card"></i>
+        <h3>No contact information yet</h3>
+        <p>Add your contact details through the admin dashboard.</p>
+        <a routerLink="/admin" class="btn btn-primary">Go to Admin</a>
+      </div>
+    </ng-template>
+  </div>
+</section>

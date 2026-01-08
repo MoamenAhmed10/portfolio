@@ -1,0 +1,83 @@
+<div class="admin-section">
+  <h2 class="section-title">Manage CV / Resume</h2>
+
+  <div
+    class="message"
+    *ngIf="message"
+    [class.success]="messageType === 'success'"
+    [class.error]="messageType === 'error'"
+  >
+    {{ message }}
+  </div>
+
+  <!-- Current CV Display -->
+  <div class="current-cv" *ngIf="currentCV">
+    <h3 class="subsection-title">Current CV</h3>
+    <div class="cv-card">
+      <div class="cv-icon">
+        <i class="fas fa-file-pdf"></i>
+      </div>
+      <div class="cv-info">
+        <h4 class="cv-filename">{{ currentCV.originalName }}</h4>
+        <div class="cv-meta">
+          <span *ngIf="currentCV.size">
+            <i class="fas fa-weight"></i> {{ formatFileSize(currentCV.size) }}
+          </span>
+          <span *ngIf="currentCV.uploadedAt">
+            <i class="fas fa-calendar"></i> {{ formatDate(currentCV.uploadedAt) }}
+          </span>
+        </div>
+      </div>
+      <div class="cv-actions">
+        <button class="btn btn-view" (click)="viewCV()"><i class="fas fa-eye"></i> View</button>
+        <button class="btn btn-delete" (click)="deleteCV()">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload New CV -->
+  <div class="upload-section">
+    <h3 class="subsection-title">{{ currentCV ? 'Upload New CV' : 'Upload CV' }}</h3>
+
+    <div
+      class="upload-area"
+      [class.has-file]="selectedFile"
+      (dragover)="$event.preventDefault()"
+      (drop)="$event.preventDefault()"
+    >
+      <input type="file" id="cvFile" accept=".pdf" (change)="onFileSelected($event)" hidden />
+
+      <div class="upload-content" *ngIf="!selectedFile">
+        <div class="upload-icon">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <p class="upload-text">Drag & drop your CV here or</p>
+        <label for="cvFile" class="btn btn-choose">Choose File</label>
+        <p class="upload-hint">Only PDF files, max 10MB</p>
+      </div>
+
+      <div class="selected-file" *ngIf="selectedFile">
+        <div class="file-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <div class="file-info">
+          <p class="file-name">{{ selectedFile.name }}</p>
+          <p class="file-size">{{ formatFileSize(selectedFile.size) }}</p>
+        </div>
+        <button class="btn btn-remove" (click)="selectedFile = null">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="upload-actions" *ngIf="selectedFile">
+      <button class="btn btn-primary" (click)="uploadCV()" [disabled]="isUploading">
+        <i class="fas fa-upload" *ngIf="!isUploading"></i>
+        <i class="fas fa-spinner fa-spin" *ngIf="isUploading"></i>
+        {{ isUploading ? 'Uploading...' : 'Upload CV' }}
+      </button>
+    </div>
+  </div>
+</div>

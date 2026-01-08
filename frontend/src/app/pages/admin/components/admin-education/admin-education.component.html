@@ -1,0 +1,123 @@
+<div class="admin-section">
+  <div class="section-header">
+    <h2 class="section-title">Education</h2>
+    <button class="btn btn-primary" (click)="openForm()" *ngIf="!showForm">
+      <i class="fas fa-plus"></i>
+      Add Education
+    </button>
+  </div>
+
+  <div
+    class="alert"
+    *ngIf="message"
+    [class.success]="messageType === 'success'"
+    [class.error]="messageType === 'error'"
+  >
+    {{ message }}
+  </div>
+
+  <!-- Form -->
+  <div class="form-card" *ngIf="showForm">
+    <h3 class="form-title">{{ editingId ? 'Edit' : 'Add' }} Education</h3>
+    <form [formGroup]="educationForm" (ngSubmit)="onSubmit()" class="admin-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="degree">Degree *</label>
+          <input
+            type="text"
+            id="degree"
+            formControlName="degree"
+            placeholder="Bachelor of Science in Computer Science"
+          />
+        </div>
+        <div class="form-group">
+          <label for="institution">Institution *</label>
+          <input
+            type="text"
+            id="institution"
+            formControlName="institution"
+            placeholder="University Name"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" id="location" formControlName="location" placeholder="City, Country" />
+        </div>
+        <div class="form-group">
+          <label for="gpa">GPA</label>
+          <input type="text" id="gpa" formControlName="gpa" placeholder="3.8/4.0" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startDate">Start Date *</label>
+          <input type="text" id="startDate" formControlName="startDate" placeholder="Sep 2018" />
+        </div>
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <input
+            type="text"
+            id="endDate"
+            formControlName="endDate"
+            placeholder="Jun 2022 or leave empty for Present"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="3"
+          placeholder="Additional details about your education"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="order">Display Order</label>
+        <input type="number" id="order" formControlName="order" placeholder="0" />
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="educationForm.invalid || isLoading"
+        >
+          <i class="fas fa-save"></i>
+          {{ isLoading ? 'Saving...' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- List -->
+  <div class="items-list" *ngIf="!showForm">
+    <div class="item-card" *ngFor="let edu of educationList">
+      <div class="item-content">
+        <h3 class="item-title">{{ edu.degree }}</h3>
+        <p class="item-subtitle">{{ edu.institution }}</p>
+        <p class="item-meta">{{ edu.startDate }} - {{ edu.endDate || 'Present' }}</p>
+      </div>
+      <div class="item-actions">
+        <button class="btn-icon btn-edit" (click)="openForm(edu)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn-icon btn-danger" (click)="deleteEducation(edu._id!)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="educationList.length === 0">
+      <i class="fas fa-graduation-cap"></i>
+      <p>No education entries yet</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<section class="projects-page">
+  <div class="page-container">
+    <h1 class="page-title">Projects</h1>
+
+    <div class="filter-buttons" *ngIf="projects.length > 0">
+      <button
+        class="filter-btn"
+        [class.active]="selectedFilter === 'all'"
+        (click)="filterProjects('all')"
+      >
+        All Projects
+      </button>
+      <button
+        class="filter-btn"
+        [class.active]="selectedFilter === 'featured'"
+        (click)="filterProjects('featured')"
+      >
+        Featured
+      </button>
+    </div>
+
+    <div class="projects-grid" *ngIf="filteredProjects.length > 0; else noProjects">
+      <div class="project-card" *ngFor="let project of filteredProjects">
+        <div class="project-image">
+          <img [src]="getProjectImageUrl(project.image)" [alt]="project.title" />
+          <div class="project-overlay">
+            <a
+              *ngIf="project.liveUrl"
+              [href]="project.liveUrl"
+              target="_blank"
+              class="project-link"
+              title="Live Demo"
+            >
+              <i class="fas fa-external-link-alt"></i>
+            </a>
+            <a
+              *ngIf="project.githubUrl"
+              [href]="project.githubUrl"
+              target="_blank"
+              class="project-link"
+              title="GitHub"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+          <span class="featured-badge" *ngIf="project.featured">
+            <i class="fas fa-star"></i>
+            Featured
+          </span>
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-description">{{ project.description }}</p>
+          <div class="project-tech" *ngIf="project.technologies && project.technologies.length > 0">
+            <span class="tech-tag" *ngFor="let tech of project.technologies">{{ tech }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noProjects>
+      <div class="empty-state">
+        <i class="fas fa-folder-open"></i>
+        <h3>No projects yet</h3>
+        <p>Add your projects through the admin dashboard.</p>
+        <a routerLink="/admin" class="btn btn-primary">Go to Admin</a>
+      </div>
+    </ng-template>
+  </div>
+</section>

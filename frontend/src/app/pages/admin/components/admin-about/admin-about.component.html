@@ -1,0 +1,52 @@
+<div class="admin-section">
+  <h2 class="section-title">About Section</h2>
+
+  <div
+    class="alert"
+    *ngIf="message"
+    [class.success]="messageType === 'success'"
+    [class.error]="messageType === 'error'"
+  >
+    {{ message }}
+  </div>
+
+  <form [formGroup]="aboutForm" (ngSubmit)="onSubmit()" class="admin-form">
+    <div class="form-group">
+      <label for="title">Section Title *</label>
+      <input type="text" id="title" formControlName="title" placeholder="Who I Am" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description *</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="6"
+        placeholder="Write about yourself, your background, and what you do..."
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Highlights</label>
+      <div class="highlights-list">
+        <div class="highlight-item" *ngFor="let highlight of highlights.controls; let i = index">
+          <input type="text" [formControl]="$any(highlight)" placeholder="Add a highlight" />
+          <button type="button" class="btn-icon btn-danger" (click)="removeHighlight(i)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm" (click)="addHighlight()">
+        <i class="fas fa-plus"></i>
+        Add Highlight
+      </button>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="aboutForm.invalid || isLoading">
+        <i class="fas fa-save"></i>
+        {{ isLoading ? 'Saving...' : 'Save About' }}
+      </button>
+    </div>
+  </form>
+</div>

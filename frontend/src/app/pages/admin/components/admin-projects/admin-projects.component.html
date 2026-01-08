@@ -1,0 +1,118 @@
+<div class="admin-section">
+  <h2 class="section-title">Manage Projects</h2>
+
+  <div
+    class="message"
+    *ngIf="message"
+    [class.success]="messageType === 'success'"
+    [class.error]="messageType === 'error'"
+  >
+    {{ message }}
+  </div>
+
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="admin-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Project Title *</label>
+        <input type="text" formControlName="title" placeholder="e.g., E-Commerce Platform" />
+      </div>
+      <div class="form-group">
+        <label>Order</label>
+        <input type="number" formControlName="order" placeholder="0" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description *</label>
+      <textarea
+        formControlName="description"
+        rows="4"
+        placeholder="Describe your project..."
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Technologies (comma-separated)</label>
+      <input
+        type="text"
+        formControlName="technologies"
+        placeholder="e.g., Angular, Node.js, MongoDB"
+      />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Live URL</label>
+        <input type="url" formControlName="liveUrl" placeholder="https://example.com" />
+      </div>
+      <div class="form-group">
+        <label>GitHub URL</label>
+        <input type="url" formControlName="githubUrl" placeholder="https://github.com/..." />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Project Image</label>
+      <div class="image-upload">
+        <input
+          type="file"
+          id="projectImage"
+          accept="image/*"
+          (change)="onImageSelected($event)"
+          hidden
+        />
+        <label for="projectImage" class="upload-btn">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <span>Choose Image</span>
+        </label>
+        <div class="image-preview" *ngIf="imagePreview">
+          <img [src]="imagePreview" alt="Preview" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" formControlName="featured" />
+        <span>Featured Project</span>
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid || isLoading">
+        {{ isEditing ? 'Update' : 'Add' }} Project
+      </button>
+      <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="resetForm()">
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <div class="items-list">
+    <h3>Projects List</h3>
+    <div class="project-grid">
+      <div class="project-card" *ngFor="let project of projects">
+        <div class="project-image" *ngIf="project.image">
+          <img [src]="getProjectImageUrl(project.image)" [alt]="project.title" />
+        </div>
+        <div class="project-info">
+          <h4>{{ project.title }}</h4>
+          <p>
+            {{ project.description | slice : 0 : 100
+            }}{{ project.description && project.description.length > 100 ? '...' : '' }}
+          </p>
+          <span class="featured-badge" *ngIf="project.featured">Featured</span>
+        </div>
+        <div class="project-actions">
+          <button class="btn-icon btn-edit" (click)="editProject(project)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn-icon btn-delete" (click)="deleteProject(project._id)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <p class="empty-message" *ngIf="projects.length === 0">No projects yet.</p>
+  </div>
+</div>

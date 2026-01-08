@@ -1,0 +1,31 @@
+<section class="admin-page">
+  <div class="admin-container">
+    <aside class="admin-sidebar">
+      <h2 class="sidebar-title">
+        <i class="fas fa-cog"></i>
+        Admin Dashboard
+      </h2>
+      <nav class="sidebar-nav">
+        <a
+          *ngFor="let item of menuItems"
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <i [class]="item.icon"></i>
+          <span>{{ item.label }}</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a routerLink="/" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+          Back to Portfolio
+        </a>
+      </div>
+    </aside>
+
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</section>

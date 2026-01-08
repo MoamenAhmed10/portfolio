@@ -1,0 +1,40 @@
+<section class="cv-page">
+  <div class="page-container">
+    <h1 class="page-title">Curriculum Vitae</h1>
+
+    <div class="cv-content" *ngIf="cv && cv.path; else noCV">
+      <div class="cv-card">
+        <div class="cv-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <div class="cv-info">
+          <h2 class="cv-name">{{ cv.originalName }}</h2>
+          <p class="cv-size" *ngIf="cv.size">{{ formatFileSize(cv.size) }}</p>
+        </div>
+        <div class="cv-actions">
+          <a [href]="getCvViewUrl()" target="_blank" class="btn btn-secondary">
+            <i class="fas fa-eye"></i>
+            View
+          </a>
+          <a [href]="downloadUrl" class="btn btn-primary">
+            <i class="fas fa-download"></i>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="cv-preview">
+        <iframe [src]="getCvViewUrl() | safeUrl" type="application/pdf"></iframe>
+      </div>
+    </div>
+
+    <ng-template #noCV>
+      <div class="empty-state">
+        <i class="fas fa-file-pdf"></i>
+        <h3>No CV uploaded yet</h3>
+        <p>Upload your CV through the admin dashboard.</p>
+        <a routerLink="/admin" class="btn btn-primary">Go to Admin</a>
+      </div>
+    </ng-template>
+  </div>
+</section>

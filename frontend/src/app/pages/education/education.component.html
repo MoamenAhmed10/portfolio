@@ -1,0 +1,47 @@
+<section class="education-page">
+  <div class="page-container">
+    <h1 class="page-title">Education</h1>
+
+    <div class="timeline" *ngIf="educationList.length > 0; else noEducation">
+      <div
+        class="timeline-item"
+        *ngFor="let edu of educationList; let i = index"
+        [class.left]="i % 2 === 0"
+        [class.right]="i % 2 !== 0"
+      >
+        <div class="timeline-content">
+          <div class="timeline-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-date">
+              <span>{{ edu.startDate }}</span>
+              <span *ngIf="edu.endDate"> - {{ edu.endDate }}</span>
+              <span *ngIf="!edu.endDate"> - Present</span>
+            </div>
+            <h3 class="timeline-title">{{ edu.degree }}</h3>
+            <h4 class="timeline-subtitle">{{ edu.institution }}</h4>
+            <p class="timeline-location" *ngIf="edu.location">
+              <i class="fas fa-map-marker-alt"></i>
+              {{ edu.location }}
+            </p>
+            <p class="timeline-description" *ngIf="edu.description">{{ edu.description }}</p>
+            <div class="timeline-gpa" *ngIf="edu.gpa">
+              <span class="gpa-label">GPA:</span>
+              <span class="gpa-value">{{ edu.gpa }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noEducation>
+      <div class="empty-state">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>No education entries yet</h3>
+        <p>Add your education history through the admin dashboard.</p>
+        <a routerLink="/admin" class="btn btn-primary">Go to Admin</a>
+      </div>
+    </ng-template>
+  </div>
+</section>
