@@ -1,6 +1,54 @@
 <section class="experience-page">
   <div class="page-container">
-    <h1 class="page-title">Experience</h1>
+    <!-- Page Header -->
+    <div class="page-header">
+      <p class="eyebrow">Experience</p>
+      <h1 class="page-title">Professional Journey</h1>
+      <p class="page-subtitle">
+        Full-stack development roles, leadership experience, and collaborative projects across
+        diverse industries.
+      </p>
+
+      <!-- Metrics Cards -->
+      <div class="metrics-grid" *ngIf="experienceCount > 0">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="metric-content">
+            <span class="metric-label">Roles</span>
+            <span class="metric-value">{{ experienceCount }}</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="metric-content">
+            <span class="metric-label">Companies</span>
+            <span class="metric-value">{{ uniqueCompanies }}</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-hourglass-half"></i>
+          </div>
+          <div class="metric-content">
+            <span class="metric-label">Years Active</span>
+            <span class="metric-value">{{ yearsOfExperience }}+</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <div class="metric-content">
+            <span class="metric-label">Technologies</span>
+            <span class="metric-value">{{ totalTechnologies }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="experience-list" *ngIf="experienceList.length > 0; else noExperience">
       <div class="experience-card" *ngFor="let exp of experienceList">

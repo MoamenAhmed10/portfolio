@@ -1,10 +1,18 @@
 <nav class="navbar">
   <div class="nav-container">
-    <a routerLink="/" class="nav-logo" (click)="closeMenu()">
+    <a routerLink="/" class="nav-logo" (click)="closeMenu()" aria-label="Go to home">
+      <span class="logo-mark">MA</span>
       <span class="logo-text">Portfolio</span>
     </a>
 
-    <button class="nav-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+    <button
+      type="button"
+      class="nav-toggle"
+      (click)="toggleMenu()"
+      [class.active]="isMenuOpen"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-label="Toggle navigation"
+    >
       <span class="hamburger"></span>
     </button>
 
@@ -20,16 +28,14 @@
           {{ item.label }}
         </a>
       </li>
-      <li class="nav-item admin-link">
-        <a
-          routerLink="/admin"
-          routerLinkActive="active"
-          class="nav-link admin"
-          (click)="closeMenu()"
-        >
-          Admin
-        </a>
-      </li>
     </ul>
   </div>
+
+  <button
+    type="button"
+    class="nav-backdrop"
+    *ngIf="isMenuOpen"
+    aria-label="Close navigation"
+    (click)="closeMenu()"
+  ></button>
 </nav>

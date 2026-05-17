@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { ContactService, Contact } from '../../core/services/contact.service';
 
 @Component({
@@ -12,10 +13,18 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private contactService: ContactService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private title: Title,
+    private meta: Meta,
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('Contact | Portfolio');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Reach out by email or through social profiles to discuss opportunities, collaborations, or freelance work.',
+    });
     this.loadContact();
   }
 

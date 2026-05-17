@@ -1,6 +1,45 @@
 <section class="education-page">
   <div class="page-container">
-    <h1 class="page-title">Education</h1>
+    <!-- Page Header -->
+    <div class="page-header">
+      <p class="eyebrow">Education</p>
+      <h1 class="page-title">Academic Background</h1>
+      <p class="page-subtitle">
+        University education and professional development across multiple disciplines and
+        institutions.
+      </p>
+
+      <!-- Metrics Cards -->
+      <div class="metrics-grid" *ngIf="educationCount > 0">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="metric-content">
+            <span class="metric-label">Degrees</span>
+            <span class="metric-value">{{ educationCount }}</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="metric-content">
+            <span class="metric-label">Timeline</span>
+            <span class="metric-value">{{ earliestYear }}–{{ latestYear }}</span>
+          </div>
+        </div>
+        <div class="metric-card" *ngIf="hasGPA">
+          <div class="metric-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="metric-content">
+            <span class="metric-label">Avg GPA</span>
+            <span class="metric-value">{{ averageGPA }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="timeline" *ngIf="educationList.length > 0; else noEducation">
       <div

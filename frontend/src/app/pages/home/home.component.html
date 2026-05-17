@@ -2,18 +2,36 @@
   <div class="hero-container">
     <div class="hero-content">
       <div class="hero-text">
+        <span class="hero-kicker">Portfolio / Full-stack</span>
         <span class="hero-greeting">Hello, I'm</span>
         <h1 class="hero-name">{{ profile?.name || 'Your Name' }}</h1>
         <h2 class="hero-title">{{ profile?.title || 'Full Stack Developer' }}</h2>
-        <p class="hero-tagline">{{ profile?.tagline || 'Building amazing digital experiences' }}</p>
+        <p class="hero-tagline">
+          {{
+            profile?.tagline ||
+              'Building modern digital experiences with clean architecture and sharp visuals.'
+          }}
+        </p>
+        <div class="hero-points">
+          <span class="hero-point">API-driven portfolio</span>
+          <span class="hero-point">Responsive UI</span>
+          <span class="hero-point">Admin-managed content</span>
+        </div>
         <div class="hero-buttons">
           <a routerLink="/projects" class="btn btn-primary">View Projects</a>
           <a routerLink="/contact" class="btn btn-secondary">Contact Me</a>
         </div>
       </div>
-      <div class="hero-image" *ngIf="profile?.photo">
+      <div class="hero-image">
         <div class="image-wrapper">
           <img [src]="getPhotoUrl(profile?.photo)" [alt]="profile?.name" />
+        </div>
+        <div class="hero-profile-card card-surface">
+          <span class="profile-status"></span>
+          <div>
+            <p class="profile-label">Currently building</p>
+            <p class="profile-value">Elegant portfolio and product experiences</p>
+          </div>
         </div>
       </div>
     </div>
@@ -27,11 +45,17 @@
 
 <section class="featured-section" *ngIf="featuredProjects.length > 0">
   <div class="section-container">
-    <h2 class="section-title">Featured Projects</h2>
+    <div class="section-heading">
+      <span class="section-kicker">Selected work</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-copy">
+        A small sample of the work built to balance product thinking, polish, and speed.
+      </p>
+    </div>
     <div class="projects-grid">
       <div class="project-card" *ngFor="let project of featuredProjects">
         <div class="project-image">
-          <img [src]="getProjectImageUrl(project.image)" [alt]="project.title" />
+          <img [src]="getProjectImageUrl(project.image, project.title)" [alt]="project.title" />
           <div class="project-overlay">
             <a
               *ngIf="project.liveUrl"
@@ -70,7 +94,9 @@
   <div class="section-container">
     <div class="cta-content">
       <h2 class="cta-title">Let's Work Together</h2>
-      <p class="cta-text">Have a project in mind? Let's create something amazing.</p>
+      <p class="cta-text">
+        Have a project in mind? Let's turn it into something precise, fast, and credible.
+      </p>
       <a routerLink="/contact" class="btn btn-primary btn-large">Get In Touch</a>
     </div>
   </div>

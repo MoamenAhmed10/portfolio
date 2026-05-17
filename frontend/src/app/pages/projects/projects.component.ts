@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProjectService, Project } from '../../core/services/project.service';
 import { environment } from '../../../environments/environment';
+import { createImagePlaceholder } from '../../shared/utils/image-placeholder';
 
 @Component({
   selector: 'app-projects',
@@ -16,7 +17,7 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +45,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjectImageUrl(image: string | undefined): string {
-    if (!image) return 'assets/default-project.png';
+    if (!image) return createImagePlaceholder('Project preview', '#5fd0ff', '#121a30');
     return `${this.apiUrl}${image}`;
   }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './admin.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { AdminAboutComponent } from './components/admin-about/admin-about.component';
 import { AdminEducationComponent } from './components/admin-education/admin-education.component';
@@ -11,11 +12,17 @@ import { AdminProjectsComponent } from './components/admin-projects/admin-projec
 import { AdminSkillsComponent } from './components/admin-skills/admin-skills.component';
 import { AdminContactComponent } from './components/admin-contact/admin-contact.component';
 import { AdminCvComponent } from './components/admin-cv/admin-cv.component';
+import { AuthGuard } from '../../core/guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: 'login',
+    component: AdminLoginComponent,
+  },
+  {
     path: '',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: 'profile', component: AdminProfileComponent },
@@ -33,6 +40,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AdminComponent,
+    AdminLoginComponent,
     AdminProfileComponent,
     AdminAboutComponent,
     AdminEducationComponent,

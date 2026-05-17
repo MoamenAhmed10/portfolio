@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cv/cv.module').then((m) => m.CvModule),
   },
   {
-    path: 'admin',
+    path: 'admin-workspace',
     loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
   },
   {

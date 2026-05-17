@@ -1,9 +1,34 @@
 <section class="contact-page">
   <div class="page-container">
-    <h1 class="page-title">Get In Touch</h1>
-    <p class="page-subtitle">
-      Have a question or want to work together? I'd love to hear from you!
-    </p>
+    <header class="page-header">
+      <p class="eyebrow">Contact</p>
+      <h1 class="page-title">Get In Touch</h1>
+      <p class="page-subtitle">
+        Have a question, a project idea, or an opportunity in mind? I respond best to direct, clear
+        briefs.
+      </p>
+    </header>
+
+    <div class="contact-banner" *ngIf="contact && contact.email">
+      <div class="banner-copy">
+        <span class="banner-label">Open for new work</span>
+        <h2>Let's build something useful.</h2>
+        <p>
+          Send a direct email or connect through one of the profiles below. I keep the process
+          simple.
+        </p>
+      </div>
+      <div class="banner-actions">
+        <a [href]="'mailto:' + contact.email" class="btn btn-primary">
+          <i class="fas fa-envelope"></i>
+          Email me
+        </a>
+        <a routerLink="/cv" class="btn btn-secondary">
+          <i class="fas fa-file-pdf"></i>
+          View CV
+        </a>
+      </div>
+    </div>
 
     <div class="contact-content" *ngIf="contact && contact.email; else noContact">
       <div class="contact-info">
@@ -41,19 +66,43 @@
       <div class="social-section">
         <h2 class="social-title">Connect With Me</h2>
         <div class="social-links">
-          <a *ngIf="contact.github" [href]="contact.github" target="_blank" class="social-card">
+          <a
+            *ngIf="contact.github"
+            [href]="contact.github"
+            target="_blank"
+            rel="noreferrer"
+            class="social-card"
+          >
             <i class="fab fa-github"></i>
             <span>GitHub</span>
           </a>
-          <a *ngIf="contact.linkedin" [href]="contact.linkedin" target="_blank" class="social-card">
+          <a
+            *ngIf="contact.linkedin"
+            [href]="contact.linkedin"
+            target="_blank"
+            rel="noreferrer"
+            class="social-card"
+          >
             <i class="fab fa-linkedin"></i>
             <span>LinkedIn</span>
           </a>
-          <a *ngIf="contact.twitter" [href]="contact.twitter" target="_blank" class="social-card">
+          <a
+            *ngIf="contact.twitter"
+            [href]="contact.twitter"
+            target="_blank"
+            rel="noreferrer"
+            class="social-card"
+          >
             <i class="fab fa-twitter"></i>
             <span>Twitter</span>
           </a>
-          <a *ngIf="contact.facebook" [href]="contact.facebook" target="_blank" class="social-card">
+          <a
+            *ngIf="contact.facebook"
+            [href]="contact.facebook"
+            target="_blank"
+            rel="noreferrer"
+            class="social-card"
+          >
             <i class="fab fa-facebook"></i>
             <span>Facebook</span>
           </a>
@@ -61,6 +110,7 @@
             *ngIf="contact.instagram"
             [href]="contact.instagram"
             target="_blank"
+            rel="noreferrer"
             class="social-card"
           >
             <i class="fab fa-instagram"></i>

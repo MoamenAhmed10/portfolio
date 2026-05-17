@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { CvService, CV } from '../../core/services/cv.service';
 import { environment } from '../../../environments/environment';
 
@@ -15,10 +16,18 @@ export class CvComponent implements OnInit {
 
   constructor(
     private cvService: CvService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private title: Title,
+    private meta: Meta,
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('CV / Resume | Portfolio');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Preview and download the latest resume with a built-in PDF viewer and direct download link.',
+    });
     this.loadCV();
     this.downloadUrl = this.cvService.getDownloadUrl();
   }
@@ -45,5 +54,17 @@ export class CvComponent implements OnInit {
       return `${kb.toFixed(1)} KB`;
     }
     return `${(kb / 1024).toFixed(1)} MB`;
+  }
+
+  formatDate(dateString: string): string {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+
+  get lastUpdated(): string {
+    return this.cv?.createdAt || this.cv?.uploadedAt || '';
   }
 }

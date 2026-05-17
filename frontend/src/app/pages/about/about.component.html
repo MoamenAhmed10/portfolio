@@ -1,11 +1,22 @@
 <section class="about-page">
   <div class="page-container">
-    <h1 class="page-title">About Me</h1>
+    <header class="page-header">
+      <p class="eyebrow">About</p>
+      <h1 class="page-title">About Me</h1>
+      <p class="page-subtitle">
+        A focused summary of what I build, how I work, and what I bring to a team or client.
+      </p>
+      <div class="page-tags">
+        <span class="meta-pill" *ngIf="profile?.title">{{ profile?.title }}</span>
+        <span class="meta-pill" *ngIf="profile?.subtitle">{{ profile?.subtitle }}</span>
+        <span class="meta-pill meta-pill-accent">{{ highlightCount }} highlights</span>
+      </div>
+    </header>
 
     <div class="about-content">
-      <div class="about-image" *ngIf="profile?.photo">
+      <div class="about-image">
         <div class="image-wrapper">
-          <img [src]="getPhotoUrl(profile?.photo)" [alt]="profile?.name" />
+          <img [src]="getPhotoUrl(profile?.photo)" [alt]="profile?.name || 'About me photo'" />
         </div>
       </div>
 
@@ -13,6 +24,21 @@
         <h2 class="about-title">{{ about?.title || 'Who I Am' }}</h2>
         <div class="about-description">
           <p>{{ about?.description || 'Add your about content through the admin dashboard.' }}</p>
+        </div>
+
+        <div class="about-stats">
+          <div class="stat-card">
+            <span class="stat-value">{{ profile?.title || 'Portfolio lead' }}</span>
+            <span class="stat-label">Current focus</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">{{ highlightCount }}</span>
+            <span class="stat-label">Key highlights</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">{{ profile?.tagline ? 'Live' : 'Ready' }}</span>
+            <span class="stat-label">Profile status</span>
+          </div>
         </div>
 
         <div

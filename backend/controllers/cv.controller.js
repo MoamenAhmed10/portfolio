@@ -1,6 +1,15 @@
 const CV = require("../models/cv.model");
 const fs = require("fs");
+const fsPromises = fs.promises;
 const path = require("path");
+
+function resolveStoredPath(storedPath) {
+  if (!storedPath) {
+    return null;
+  }
+
+  return path.join(__dirname, "..", storedPath.replace(/^\/+/, ""));
+}
 
 // Get CV
 exports.getCV = async (req, res) => {
@@ -24,9 +33,9 @@ exports.uploadCV = async (req, res) => {
     // Delete old CV if exists
     const oldCV = await CV.findOne();
     if (oldCV) {
-      const oldPath = path.join(__dirname, "..", oldCV.path);
-      if (fs.existsSync(oldPath)) {
-        fs.unlinkSync(oldPath);
+      const oldPath = resolveStoredPath(oldCV.path);
+      if (oldPath) {
+        deleteFileAsync(oldPath);
       }
       await CV.deleteOne({ _id: oldCV._id });
     }
@@ -52,11 +61,22 @@ exports.deleteCV = async (req, res) => {
   try {
     const cv = await CV.findOne();
     if (cv) {
-      const cvPath = path.join(__dirname, "..", cv.path);
-      if (fs.existsSync(cvPath)) {
-        fs.unlinkSync(cvPath);
+      const cvPath = resolveStoredPath(cv.path);
+      if (cvPath) {
+        deleteFileAsync(cvPath);
       }
       await CV.deleteOne({ _id: cv._id });
+    }
+
+    // Async file delete helper (non-blocking)
+    async function deleteFileAsync(filePath) {
+      try {
+        if (filePath && fs.existsSync(filePath)) {
+          await fsPromises.unlink(filePath);
+        }
+      } catch (err) {
+        console.warn(`Could not delete file: ${filePath}`, err && err.message);
+      }
     }
     res.json({ message: "CV deleted successfully" });
   } catch (error) {
@@ -74,8 +94,8 @@ exports.downloadCV = async (req, res) => {
       return res.status(404).json({ message: "CV not found" });
     }
 
-    const filePath = path.join(__dirname, "..", cv.path);
-    if (!fs.existsSync(filePath)) {
+    const filePath = resolveStoredPath(cv.path);
+    if (!filePath || !fs.existsSync(filePath)) {
       return res.status(404).json({ message: "CV file not found" });
     }
 

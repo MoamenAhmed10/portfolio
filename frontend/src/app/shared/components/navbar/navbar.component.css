@@ -3,17 +3,17 @@
   top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  backdrop-filter: blur(10px);
+  background: rgba(8, 12, 25, 0.72);
+  backdrop-filter: blur(18px);
   z-index: 1000;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-container {
-  max-width: 1400px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,58 +21,74 @@
 }
 
 .nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
   text-decoration: none;
 }
 
-.logo-text {
-  font-size: 1.8rem;
+.logo-mark {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #07101c;
+  background: linear-gradient(135deg, #5fd0ff 0%, #7c8cff 48%, #9b8cff 100%);
+  box-shadow: 0 14px 28px rgba(124, 140, 255, 0.18);
+}
+
+.logo-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f7f8fb;
+  letter-spacing: 0.02em;
 }
 
 .nav-menu {
   display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
   gap: 0.5rem;
   align-items: center;
 }
 
 .nav-link {
-  color: #b8b8b8;
-  text-decoration: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 25px;
+  color: #c4cbdb;
+  padding: 0.72rem 1.05rem;
+  border-radius: 999px;
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
+  font-size: 0.94rem;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
   position: relative;
 }
 
 .nav-link:hover {
   color: #ffffff;
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-link.active {
-  color: #ffffff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #07101c;
+  background: var(--accent-gradient);
+  box-shadow: 0 14px 24px rgba(124, 140, 255, 0.16);
 }
 
 .nav-link.admin {
-  border: 1px solid #667eea;
-  color: #667eea;
+  border: 1px solid rgba(124, 140, 255, 0.36);
+  color: #cfd5ff;
+  background: rgba(124, 140, 255, 0.06);
 }
 
 .nav-link.admin:hover,
 .nav-link.admin.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
   border-color: transparent;
+  color: #07101c;
+  background: var(--accent-gradient);
 }
 
 .nav-toggle {
@@ -90,7 +106,7 @@
   background: #ffffff;
   border-radius: 2px;
   position: relative;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .hamburger::before,
@@ -129,31 +145,45 @@
 @media (max-width: 1024px) {
   .nav-toggle {
     display: block;
+    position: relative;
+    z-index: 1101;
   }
 
   .nav-menu {
     position: fixed;
-    top: 80px;
-    left: 0;
-    right: 0;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    inset: 80px 0 auto 0;
+    background: rgba(7, 11, 22, 0.96);
     flex-direction: column;
-    padding: 2rem;
-    gap: 0.5rem;
-    transform: translateY(-150%);
+    padding: 1.25rem;
+    gap: 0.7rem;
+    transform: translateY(-10px) scale(0.98);
     opacity: 0;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
   }
 
   .nav-menu.active {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
+    pointer-events: auto;
   }
 
   .nav-link {
     width: 100%;
     text-align: center;
     padding: 1rem;
+  }
+
+  .nav-backdrop {
+    position: fixed;
+    inset: 80px 0 0 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(2px);
+    z-index: 999;
   }
 }

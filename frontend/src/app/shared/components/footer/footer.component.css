@@ -1,14 +1,17 @@
 .footer {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
   color: #b8b8b8;
-  padding: 4rem 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4.5rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(13, 18, 36, 0.08), rgba(7, 11, 22, 0.9)),
+    linear-gradient(135deg, rgba(124, 140, 255, 0.09), rgba(95, 208, 255, 0.04));
+  backdrop-filter: blur(18px);
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.25rem;
 }
 
 .footer-content {
@@ -16,13 +19,13 @@
   grid-template-columns: 2fr 1fr 1fr;
   gap: 3rem;
   padding-bottom: 3rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-title {
-  font-size: 1.8rem;
+  font-size: 1.55rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -30,8 +33,30 @@
 }
 
 .footer-description {
-  color: #888;
+  color: #9ca6ba;
   line-height: 1.6;
+}
+
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.footer-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #dbe2f1;
+  font-size: 0.85rem;
+}
+
+.footer-contact-note {
+  margin-bottom: 1rem;
 }
 
 .footer-subtitle {
@@ -58,7 +83,7 @@
 }
 
 .footer-links a:hover {
-  color: #667eea;
+  color: #9b8cff;
 }
 
 .social-links {
@@ -70,26 +95,29 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #667eea;
+  color: #cfd5ff;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
   font-size: 1.1rem;
 }
 
 .social-link:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
+  background: var(--accent-gradient);
+  color: #07101c;
   transform: translateY(-3px);
 }
 
 .footer-bottom {
   text-align: center;
   padding: 1.5rem 0;
-  color: #666;
+  color: #8090a9;
   font-size: 0.9rem;
 }
 

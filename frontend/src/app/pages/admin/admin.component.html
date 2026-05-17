@@ -1,10 +1,16 @@
 <section class="admin-page">
   <div class="admin-container">
     <aside class="admin-sidebar">
-      <h2 class="sidebar-title">
-        <i class="fas fa-cog"></i>
-        Admin Dashboard
-      </h2>
+      <div class="sidebar-header">
+        <p class="eyebrow">Content Studio</p>
+        <h2 class="sidebar-title">
+          <i class="fas fa-cog"></i>
+          Admin Dashboard
+        </h2>
+        <p class="sidebar-copy">
+          Update the public portfolio content, media, and links from one place.
+        </p>
+      </div>
       <nav class="sidebar-nav">
         <a
           *ngFor="let item of menuItems"
@@ -17,10 +23,17 @@
         </a>
       </nav>
       <div class="sidebar-footer">
-        <a routerLink="/" class="back-link">
-          <i class="fas fa-arrow-left"></i>
-          Back to Portfolio
-        </a>
+        <p class="sidebar-note">Changes publish directly to the live portfolio pages.</p>
+        <div class="footer-actions">
+          <a routerLink="/" class="footer-action-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Portfolio
+          </a>
+          <button class="footer-action-btn logout-btn" (click)="logout()" title="Log out">
+            <i class="fas fa-sign-out-alt"></i>
+            Sign Out
+          </button>
+        </div>
       </div>
     </aside>
 

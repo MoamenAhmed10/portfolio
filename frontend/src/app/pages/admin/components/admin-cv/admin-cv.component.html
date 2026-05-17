@@ -23,8 +23,9 @@
           <span *ngIf="currentCV.size">
             <i class="fas fa-weight"></i> {{ formatFileSize(currentCV.size) }}
           </span>
-          <span *ngIf="currentCV.uploadedAt">
-            <i class="fas fa-calendar"></i> {{ formatDate(currentCV.uploadedAt) }}
+          <span *ngIf="currentCV.createdAt || currentCV.uploadedAt">
+            <i class="fas fa-calendar"></i>
+            {{ formatDate(currentCV.createdAt || currentCV.uploadedAt || '') }}
           </span>
         </div>
       </div>

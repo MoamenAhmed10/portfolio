@@ -206,4 +206,65 @@
   .skill-category {
     padding: 1.5rem;
   }
+
+  .skills-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+.page-header {
+  max-width: 780px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: #8ea2ff;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  max-width: 700px;
+  margin: 1rem auto 0;
+  color: #b9c4da;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.skills-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.metric-card {
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metric-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.3rem;
+}
+
+.metric-label {
+  color: #9fa9bd;
+  font-size: 0.9rem;
+}
+
+.category-copy {
+  margin: 0.35rem 0 0;
+  color: #9fa9bd;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }

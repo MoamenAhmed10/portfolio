@@ -206,4 +206,83 @@
     text-align: center;
     align-items: center;
   }
+
+  .contact-banner {
+    padding: 1.5rem;
+  }
+
+  .banner-actions {
+    width: 100%;
+  }
+
+  .banner-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.page-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: #8ea2ff;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  max-width: 700px;
+  margin: 1rem auto 0;
+  color: #b9c4da;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.contact-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.16), rgba(118, 75, 162, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.banner-label {
+  display: inline-flex;
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #dce3ff;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.banner-copy h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+
+.banner-copy p {
+  margin: 0;
+  color: #c3cae0;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.banner-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }

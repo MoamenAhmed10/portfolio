@@ -24,6 +24,16 @@
           Choose Photo
         </label>
         <input type="file" id="photo" accept="image/*" (change)="onFileSelect($event)" hidden />
+        <button
+          *ngIf="selectedFile"
+          type="button"
+          class="btn btn-primary"
+          (click)="onUploadPhoto()"
+          [disabled]="isLoading"
+        >
+          <i class="fas fa-upload"></i>
+          {{ isLoading ? 'Uploading...' : 'Change Photo' }}
+        </button>
         <p class="upload-hint">Recommended: 400x400px, JPG or PNG</p>
       </div>
     </div>

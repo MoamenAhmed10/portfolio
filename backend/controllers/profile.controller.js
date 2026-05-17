@@ -1,6 +1,15 @@
 const Profile = require("../models/profile.model");
 const fs = require("fs");
+const fsPromises = fs.promises;
 const path = require("path");
+
+function resolveStoredPath(storedPath) {
+  if (!storedPath) {
+    return null;
+  }
+
+  return path.join(__dirname, "..", storedPath.replace(/^\/+/, ""));
+}
 
 // Get profile
 exports.getProfile = async (req, res) => {
@@ -28,9 +37,9 @@ exports.createOrUpdateProfile = async (req, res) => {
     if (profile) {
       // Delete old photo if new one is uploaded
       if (req.file && profile.photo) {
-        const oldPhotoPath = path.join(__dirname, "..", profile.photo);
-        if (fs.existsSync(oldPhotoPath)) {
-          fs.unlinkSync(oldPhotoPath);
+        const oldPhotoPath = resolveStoredPath(profile.photo);
+        if (oldPhotoPath) {
+          deleteFileAsync(oldPhotoPath);
         }
       }
       Object.assign(profile, profileData);
@@ -61,9 +70,9 @@ exports.uploadPhoto = async (req, res) => {
     if (profile) {
       // Delete old photo
       if (profile.photo) {
-        const oldPhotoPath = path.join(__dirname, "..", profile.photo);
-        if (fs.existsSync(oldPhotoPath)) {
-          fs.unlinkSync(oldPhotoPath);
+        const oldPhotoPath = resolveStoredPath(profile.photo);
+        if (oldPhotoPath) {
+          deleteFileAsync(oldPhotoPath);
         }
       }
       profile.photo = `/uploads/images/${req.file.filename}`;
@@ -91,9 +100,20 @@ exports.deleteProfile = async (req, res) => {
   try {
     const profile = await Profile.findOne();
     if (profile && profile.photo) {
-      const photoPath = path.join(__dirname, "..", profile.photo);
-      if (fs.existsSync(photoPath)) {
-        fs.unlinkSync(photoPath);
+      const photoPath = resolveStoredPath(profile.photo);
+      if (photoPath) {
+        deleteFileAsync(photoPath);
+      }
+    }
+
+    // Async file delete helper (non-blocking)
+    async function deleteFileAsync(filePath) {
+      try {
+        if (filePath && fs.existsSync(filePath)) {
+          await fsPromises.unlink(filePath);
+        }
+      } catch (err) {
+        console.warn(`Could not delete file: ${filePath}`, err && err.message);
       }
     }
     await Profile.deleteMany({});

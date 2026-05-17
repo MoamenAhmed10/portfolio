@@ -1,6 +1,26 @@
 <section class="skills-page">
   <div class="page-container">
-    <h1 class="page-title">Skills</h1>
+    <header class="page-header">
+      <p class="eyebrow">Capabilities</p>
+      <h1 class="page-title">Skills</h1>
+      <p class="page-subtitle">
+        A practical overview of the tools and technologies I use to design, build, and ship.
+      </p>
+      <div class="skills-metrics">
+        <div class="metric-card">
+          <span class="metric-value">{{ totalSkills }}</span>
+          <span class="metric-label">Tracked skills</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-value">{{ categoryCount }}</span>
+          <span class="metric-label">Categories</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-value">{{ averageLevel }}%</span>
+          <span class="metric-label">Average proficiency</span>
+        </div>
+      </div>
+    </header>
 
     <div class="skills-content" *ngIf="skillGroups.length > 0; else noSkills">
       <div class="skill-category" *ngFor="let group of skillGroups">
@@ -8,7 +28,10 @@
           <div class="category-icon">
             <i [class]="group.icon"></i>
           </div>
-          <h2 class="category-title">{{ group.category }}</h2>
+          <div>
+            <h2 class="category-title">{{ group.category }}</h2>
+            <p class="category-copy">{{ getCategoryDescription(group.category) }}</p>
+          </div>
         </div>
 
         <div class="skills-grid">

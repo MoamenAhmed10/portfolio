@@ -1,6 +1,12 @@
 <section class="cv-page">
   <div class="page-container">
-    <h1 class="page-title">Curriculum Vitae</h1>
+    <header class="page-header">
+      <p class="eyebrow">Resume</p>
+      <h1 class="page-title">Curriculum Vitae</h1>
+      <p class="page-subtitle">
+        View the latest resume directly in the browser or download a copy for later.
+      </p>
+    </header>
 
     <div class="cv-content" *ngIf="cv && cv.path; else noCV">
       <div class="cv-card">
@@ -10,6 +16,7 @@
         <div class="cv-info">
           <h2 class="cv-name">{{ cv.originalName }}</h2>
           <p class="cv-size" *ngIf="cv.size">{{ formatFileSize(cv.size) }}</p>
+          <p class="cv-updated" *ngIf="lastUpdated">Updated {{ formatDate(lastUpdated) }}</p>
         </div>
         <div class="cv-actions">
           <a [href]="getCvViewUrl()" target="_blank" class="btn btn-secondary">
@@ -24,7 +31,7 @@
       </div>
 
       <div class="cv-preview">
-        <iframe [src]="getCvViewUrl() | safeUrl" type="application/pdf"></iframe>
+        <iframe [src]="getCvViewUrl() | safeUrl" type="application/pdf" title="CV preview"></iframe>
       </div>
     </div>
 

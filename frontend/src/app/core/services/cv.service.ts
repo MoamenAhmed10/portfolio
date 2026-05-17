@@ -9,6 +9,8 @@ export interface CV {
   originalName: string;
   path: string;
   size?: number;
+  createdAt?: string;
+  updatedAt?: string;
   uploadedAt?: string;
 }
 

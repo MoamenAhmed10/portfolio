@@ -1,0 +1,63 @@
+<section class="admin-login-page">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <i class="fas fa-lock"></i>
+        <h1>Portfolio Admin</h1>
+        <p class="login-subtitle">Enter your password to manage content</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <label for="password" class="form-label">Admin Password</label>
+          <div class="password-wrapper">
+            <input
+              id="password"
+              [type]="passwordFieldType"
+              formControlName="password"
+              class="form-input"
+              placeholder="Enter your admin password"
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+              [disabled]="isLoading"
+              title="Toggle password visibility"
+            >
+              <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+          </div>
+          <small
+            class="form-error"
+            *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          >
+            Password is required
+          </small>
+        </div>
+
+        <div class="error-message" *ngIf="errorMessage">
+          <i class="fas fa-exclamation-circle"></i>
+          {{ errorMessage }}
+        </div>
+
+        <button type="submit" class="btn-login" [disabled]="loginForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Sign In</span>
+          <span *ngIf="isLoading"> <i class="fas fa-spinner fa-spin"></i> Authenticating... </span>
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <a routerLink="/" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+          Back to Portfolio
+        </a>
+      </div>
+    </div>
+
+    <div class="login-background">
+      <div class="gradient-orb"></div>
+    </div>
+  </div>
+</section>

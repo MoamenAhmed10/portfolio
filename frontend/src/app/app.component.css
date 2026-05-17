@@ -1,4 +1,6 @@
 .main-content {
-  min-height: calc(100vh - 140px);
-  padding-top: 80px;
+  min-height: calc(100vh - 160px);
+  padding-top: 88px;
+  position: relative;
+  z-index: 1;
 }

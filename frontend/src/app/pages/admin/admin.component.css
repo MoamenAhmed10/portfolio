@@ -1,11 +1,13 @@
 .admin-page {
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   background: #0f0f1a;
+  margin-top: -88px;
+  padding-top: 88px;
 }
 
 .admin-container {
   display: flex;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 88px);
 }
 
 .admin-sidebar {
@@ -16,8 +18,8 @@
   flex-direction: column;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   position: sticky;
-  top: 80px;
-  height: calc(100vh - 80px);
+  top: 0;
+  height: 100vh;
 }
 
 .sidebar-title {
@@ -76,18 +78,50 @@
   margin-top: 1rem;
 }
 
-.back-link {
+.footer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-action-link,
+.footer-action-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #888;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.85rem;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
 
-.back-link:hover {
-  color: #667eea;
+.footer-action-link {
+  color: rgba(102, 126, 234, 0.8);
+  background: rgba(102, 126, 234, 0.08);
+}
+
+.footer-action-link:hover {
+  background: rgba(102, 126, 234, 0.15);
+  color: #7c8cff;
+}
+
+.footer-action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  font-family: inherit;
+}
+
+.footer-action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.footer-action-btn.logout-btn:hover {
+  background: rgba(255, 100, 100, 0.15);
+  color: #ff8787;
 }
 
 .admin-content {
@@ -125,4 +159,33 @@
   .nav-item i {
     margin: 0;
   }
+}
+
+.sidebar-header {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: #8ea2ff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.sidebar-copy {
+  margin: 0.75rem 0 0;
+  color: #b9c4da;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.sidebar-note {
+  margin: 0 0 0.75rem;
+  color: #9fa9bd;
+  line-height: 1.6;
+  font-size: 0.92rem;
 }

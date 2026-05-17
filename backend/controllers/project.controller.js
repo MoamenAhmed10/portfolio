@@ -1,5 +1,6 @@
 const Project = require("../models/project.model");
 const fs = require("fs");
+const fsPromises = fs.promises;
 const path = require("path");
 
 // Get all projects
@@ -20,12 +21,10 @@ exports.getFeaturedProjects = async (req, res) => {
     const projects = await Project.find({ featured: true }).sort({ order: 1 });
     res.json(projects);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Error fetching featured projects",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error fetching featured projects",
+      error: error.message,
+    });
   }
 };
 
@@ -80,8 +79,8 @@ exports.updateProject = async (req, res) => {
       const oldProject = await Project.findById(req.params.id);
       if (oldProject && oldProject.image) {
         const oldImagePath = path.join(__dirname, "..", oldProject.image);
-        if (fs.existsSync(oldImagePath)) {
-          fs.unlinkSync(oldImagePath);
+        if (oldImagePath) {
+          deleteFileAsync(oldImagePath);
         }
       }
       projectData.image = `/uploads/projects/${req.file.filename}`;
@@ -97,7 +96,7 @@ exports.updateProject = async (req, res) => {
     const project = await Project.findByIdAndUpdate(
       req.params.id,
       projectData,
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!project) {
@@ -122,8 +121,19 @@ exports.deleteProject = async (req, res) => {
     // Delete associated image
     if (project.image) {
       const imagePath = path.join(__dirname, "..", project.image);
-      if (fs.existsSync(imagePath)) {
-        fs.unlinkSync(imagePath);
+      if (imagePath) {
+        deleteFileAsync(imagePath);
+      }
+    }
+
+    // Async file delete helper (non-blocking)
+    async function deleteFileAsync(filePath) {
+      try {
+        if (filePath && fs.existsSync(filePath)) {
+          await fsPromises.unlink(filePath);
+        }
+      } catch (err) {
+        console.warn(`Could not delete file: ${filePath}`, err && err.message);
       }
     }
 

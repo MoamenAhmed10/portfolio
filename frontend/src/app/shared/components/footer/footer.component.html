@@ -4,8 +4,14 @@
       <div class="footer-section">
         <h3 class="footer-title">Portfolio</h3>
         <p class="footer-description">
-          Building amazing digital experiences with modern technologies.
+          A modern portfolio focused on clean product thinking, polished interfaces, and practical
+          delivery.
         </p>
+        <div class="footer-badges">
+          <span class="footer-badge">Angular</span>
+          <span class="footer-badge">Node.js</span>
+          <span class="footer-badge">MongoDB</span>
+        </div>
       </div>
 
       <div class="footer-section">
@@ -20,6 +26,9 @@
 
       <div class="footer-section">
         <h4 class="footer-subtitle">Connect</h4>
+        <p class="footer-description footer-contact-note">
+          Reach out for collaboration, freelance work, or product builds.
+        </p>
         <div class="social-links">
           <a *ngIf="contact.github" [href]="contact.github" target="_blank" class="social-link">
             <i class="fab fa-github"></i>
@@ -38,7 +47,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; {{ currentYear }} Portfolio. All rights reserved.</p>
+      <p>&copy; {{ currentYear }} Portfolio. Built with care and attention to detail.</p>
     </div>
   </div>
 </footer>

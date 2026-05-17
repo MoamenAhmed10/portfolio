@@ -19,7 +19,10 @@ export class AdminProfileComponent implements OnInit {
   isLoading = false;
   apiUrl = environment.apiUrl.replace('/api', '');
 
-  constructor(private fb: FormBuilder, private profileService: ProfileService) {
+  constructor(
+    private fb: FormBuilder,
+    private profileService: ProfileService,
+  ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
       title: ['', Validators.required],
@@ -87,6 +90,28 @@ export class AdminProfileComponent implements OnInit {
       error: (err) => {
         this.showMessage('Error updating profile', 'error');
         console.error(err);
+        this.isLoading = false;
+      },
+    });
+  }
+
+  onUploadPhoto(): void {
+    if (!this.selectedFile) return;
+
+    this.isLoading = true;
+    this.profileService.uploadPhoto(this.selectedFile).subscribe({
+      next: (data) => {
+        this.profile = data;
+        if (data && data.photo) {
+          this.previewUrl = `${this.apiUrl}${data.photo}`;
+        }
+        this.selectedFile = null;
+        this.showMessage('Photo updated successfully!', 'success');
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error uploading photo:', err);
+        this.showMessage('Error uploading photo', 'error');
         this.isLoading = false;
       },
     });
