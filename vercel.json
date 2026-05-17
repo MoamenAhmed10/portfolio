@@ -1,12 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/portfolio-frontend"
-      }
-    }
-  ]
+  "buildCommand": "cd frontend && npm install && npx ng build --configuration production",
+  "outputDirectory": "frontend/dist/portfolio-frontend"
 }
