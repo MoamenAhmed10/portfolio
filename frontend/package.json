@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "ng serve",
-    "build": "npx ng build --configuration production",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "vercel-build": "npx ng build --configuration production"
-  },
+  "start": "ng serve",
+  "build": "ng build --configuration production",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test"
+},
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
