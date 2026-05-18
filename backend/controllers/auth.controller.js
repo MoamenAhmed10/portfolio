@@ -14,8 +14,10 @@ const login = (req, res) => {
   }
 
   // In production, auth secrets must be explicitly configured.
-  const adminPassword = process.env.ADMIN_PASSWORD || (!isProduction ? "admin123" : null);
-  const jwtSecret = process.env.JWT_SECRET || (!isProduction ? "your-secret-key" : null);
+  const adminPassword =
+    process.env.ADMIN_PASSWORD || (!isProduction ? "admin123" : null);
+  const jwtSecret =
+    process.env.JWT_SECRET || (!isProduction ? "your-secret-key" : null);
 
   if (!adminPassword || !jwtSecret) {
     return res.status(500).json({
@@ -28,13 +30,9 @@ const login = (req, res) => {
   }
 
   // Generate JWT token (expires in 24 hours)
-  const token = jwt.sign(
-    { role: "admin" },
-    jwtSecret,
-    {
-      expiresIn: "24h",
-    },
-  );
+  const token = jwt.sign({ role: "admin" }, jwtSecret, {
+    expiresIn: "24h",
+  });
 
   return res.status(200).json({
     token,
